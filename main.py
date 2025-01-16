@@ -237,7 +237,7 @@ class CadastroScreen(Screen):
                 # Verificar a resposta
                 if resposta.status_code == 201:
                     self.ids.mensagem_erro.text = "Cadastro realizado com sucesso!"
-                    self.ids.mensagem_erro.color = (1, 1, 1, 1)  # Branco
+                    self.ids.mensagem_erro.color = (47, 79, 47, 1)  # Verde escuro
                 elif resposta.status_code == 409:
                     self.ids.mensagem_erro.text = "E-mail já cadastrado."
                 else:
