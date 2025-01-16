@@ -1,0 +1,470 @@
+<LoginScreen>:
+    GridLayout:
+        cols: 1
+        padding: [70, 30, 70, 30]
+        spacing: 20  # Espaço geral entre os widgets
+        canvas.before:
+            Color:
+                rgba: (0.702, 0.788, 0.714, 1)  # Cor de fundo
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        # Logo do app
+
+        Image:
+            source: 'logo.png'
+            allow_stretch: True
+            keep_ratio: True
+            size_hint: (0.20, 0.10)
+            pos_hint: {"center_x": 0.5}
+
+        # Layout dos campos de input
+
+        GridLayout:
+            cols: 1
+            size_hint: (0.9, None)
+            height: self.minimum_height
+            pos_hint: {"center_x": 0.5}
+            spacing: 20  # Espaço entre os widgets
+
+            # Input Usuário
+
+            TextInput:
+                id: usuario
+                hint_text: 'Usuário'
+                hint_text_color: (0, 0, 0, 1)  # Preto
+                foreground_color: (0, 0, 0, 1)  # Texto principal em preto
+                font_name: 'fonts/Roboto-Black.ttf'
+                multiline: False
+                size_hint: (1, None)
+                height: 40
+                border_width: [0, 0, 0, 0]
+                padding: [10, 10, 10, 10]
+                background_color: (1, 1, 1, 1)  # Remove o fundo padrão do TextInput
+
+            # Input Senha
+
+            TextInput:
+                id: senha
+                hint_text: 'Senha'
+                hint_text_color: (0, 0, 0, 1)  # Preto
+                foreground_color: (0, 0, 0, 1)  # Texto principal em preto
+                font_name: 'fonts/Roboto-Black.ttf'
+                multiline: False
+                password: True
+                size_hint: (1, None)
+                height: 40
+                border_width: [0, 0, 0, 0]
+                padding: [10, 10, 10, 10]
+                background_color: (1, 1, 1, 1)  # Remove o fundo padrão do TextInput
+
+            # Mensagem de erro
+
+            Label:
+                id: mensagem_erro
+                text: ""
+                color: (1, 0, 0, 1)  # Vermelho
+                font_size: 16
+                size_hint: (1, None)
+                height: 30
+
+        # Layout dos botões
+
+        BoxLayout:
+            size_hint: (0.9, None)  # Largura responsiva
+            height: 50
+            pos_hint: {"center_x": 0.5}
+            spacing: 20  # Espaço entre os botões
+                
+            # Botão Login
+                
+            Button:
+                text: 'Login'
+                bold: True
+                font_name: 'fonts/Roboto-Black.ttf'
+                size_hint: (0.5, 1)  # Tamanho proporcional
+                on_press: root.realizar_login()
+                background_color: 0, 0, 0, 0  # Remove o fundo padrão do botão
+                canvas.before:
+                    Color:
+                        rgba: (0.95, 0.6, 0.7, 1)  # Rosa escuro padrão
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        radius: [15, 15, 15, 15]  # Bordas arredondadas
+                
+            # Botão Cadastrar
+                
+            Button:
+                text: 'Cadastrar'
+                bold: True
+                font_name: 'fonts/Roboto-Black.ttf'
+                size_hint: (0.5, 1)
+                on_press:  root.manager.current = 'cadastro'
+                background_color: 0, 0, 0, 0  # Remove o fundo padrão do botão
+                canvas.before:
+                    Color:
+                        rgba: (0.95, 0.6, 0.7, 1)  # Rosa escuro padrão
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        radius: [15, 15, 15, 15]  # Bordas arredondadas
+
+<CadastroScreen>:        
+    GridLayout:
+        cols: 1
+        padding: [70, 30, 70, 30]
+        spacing: 20  # Espaço entre os widgets
+        canvas.before:
+            Color:
+                rgba: (0.702, 0.788, 0.714, 1)  # Cor de fundo
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        # Logo do app
+
+        Image:
+            source: 'logo.png'
+            allow_stretch: True
+            keep_ratio: True
+            size_hint: (0.20, 0.10)
+            pos_hint: {"center_x": 0.5}
+
+        # Layout dos campos de input
+
+        GridLayout:
+            cols: 1
+            size_hint: (0.9, None)
+            height: self.minimum_height
+            pos_hint: {"center_x": 0.5}
+            spacing: 20  # Espaço entre os widgets
+
+        # Input Usuário
+
+            TextInput:
+                id: usuario
+                hint_text: 'Cadastre o nome do tutor'
+                hint_text_color: (0, 0, 0, 1)  # Preto
+                foreground_color: (0, 0, 0, 1)  # Texto principal em preto
+                font_name: 'fonts/Roboto-Black.ttf'
+                multiline: False
+                size_hint: (1, None)
+                height: 40
+                border_width: [0, 0, 0, 0]
+                padding: [10, 10, 10, 10]
+                background_color: (1, 1, 1, 1)  # Remove o fundo padrão do TextInput
+
+            # Input Senha
+
+            TextInput:
+                id: senha
+                hint_text: 'Cadastre a senha do usuário'
+                hint_text_color: (0, 0, 0, 1)  # Preto
+                foreground_color: (0, 0, 0, 1)  # Texto principal em preto
+                font_name: 'fonts/Roboto-Black.ttf'
+                multiline: False
+                password: True
+                size_hint: (1, None)
+                height: 40
+                border_width: [0, 0, 0, 0]
+                padding: [10, 10, 10, 10]
+                background_color: (1, 1, 1, 1)  # Remove o fundo padrão do TextInput
+        
+            # E-mail
+
+            TextInput:
+                id: email
+                hint_text: 'Cadastre o seu e-mail'
+                hint_text_color: (0, 0, 0, 1)  # Preto
+                foreground_color: (0, 0, 0, 1)  # Texto principal em preto
+                font_name: 'fonts/Roboto-Black.ttf'
+                multiline: False
+                size_hint: (1, None)
+                height: 40
+                border_width: [0, 0, 0, 0]
+                padding: [10, 10, 10, 10]
+                background_color: (1, 1, 1, 1)  # Remove o fundo padrão do TextInput
+
+            # Estado
+            
+            Spinner:
+                id: estado
+                text: "Selecione o Estado"
+                values: []
+                on_text: root.on_estado_select(self, self.text)  # Passa o Spinner (self) e o texto (self.text)
+                foreground_color: (0, 0, 0, 1)  # Texto principal em preto
+                font_name: 'fonts/Roboto-Black.ttf'
+                multiline: False
+                password: True
+                size_hint: (1, None)
+                height: 40
+                border_width: [0, 0, 0, 0]
+                padding: [10, 10, 10, 10]
+                background_color: (1, 1, 1, 1)  # Remove o fundo padrão do TextInput
+
+            # Input Cidade
+
+            Spinner:
+                id: cidade
+                text: "Selecione a cidade"
+                values: []
+                foreground_color: (0, 0, 0, 1)  # Texto principal em preto
+                font_name: 'fonts/Roboto-Black.ttf'
+                multiline: False
+                password: True
+                size_hint: (1, None)
+                height: 40
+                border_width: [0, 0, 0, 0]
+                padding: [10, 10, 10, 10]
+                background_color: (1, 1, 1, 1)  # Remove o fundo padrão do TextInput
+
+            # Mensagem de erro
+
+            Label:
+                id: mensagem_erro
+                text: ""
+                color: (1, 0, 0, 1)  # Vermelho
+                font_size: 16
+                size_hint: (1, None)
+                height: 30
+
+        # Layout dos botões
+
+        BoxLayout:
+            size_hint: (0.9, None)  # Largura responsiva
+            height: 50
+            pos_hint: {"center_x": 0.5}
+            spacing: 20  # Espaço entre os botões
+
+            # Botão Cadastrar
+                
+            Button:
+                text: 'Cadastrar'
+                bold: True
+                font_name: 'fonts/Roboto-Black.ttf'
+                size_hint: (0.5, 1)  # Tamanho proporcional
+                on_press: root.enviar_cadastro ()
+                background_color: 0, 0, 0, 0  # Remove o fundo padrão do botão
+                canvas.before:
+                    Color:
+                        rgba: (0.95, 0.6, 0.7, 1)  # Rosa escuro padrão
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        radius: [15, 15, 15, 15]  # Bordas arredondadas
+                
+            # Botão Voltar
+                
+            Button:
+                text: 'Voltar'
+                bold: True
+                font_name: 'fonts/Roboto-Black.ttf'
+                size_hint: (0.5, 1)
+                on_press: root.manager.current = 'login'
+                background_color: 0, 0, 0, 0  # Remove o fundo padrão do botão
+                canvas.before:
+                    Color:
+                        rgba: (0.95, 0.6, 0.7, 1)  # Rosa escuro padrão
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        radius: [15, 15, 15, 15]  # Bordas arredondadas
+
+<EscolherDogScreen>
+
+    GridLayout:
+        cols: 1
+        padding: [70, 30, 70, 30]
+        spacing: 20  # Espaço geral entre os widgets
+        canvas.before:
+            Color:
+                rgba: (0.702, 0.788, 0.714, 1)  # Cor de fundo
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        # Logo do app
+
+        Image:
+            source: 'logo.png'
+            allow_stretch: True
+            keep_ratio: True
+            size_hint: (0.20, 0.10)
+            pos_hint: {"center_x": 0.5}
+
+        # Layout dos campos de input
+
+        GridLayout:
+            cols: 1
+            size_hint: (0.9, None)
+            height: self.minimum_height
+            pos_hint: {"center_x": 0.5}
+            spacing: 20  # Espaço entre os widgets
+
+            Spinner:
+                id: spinner_dogs
+                text: "Selecione o Dog"
+                values: []  # Lista de valores a ser preenchida pelo código Python
+                on_text: root.on_dog_select(self, self.text)  # Passa o Spinner (self) e o texto (self.text)
+                foreground_color: (0, 0, 0, 1)  # Texto principal em preto
+                font_name: 'fonts/Roboto-Black.ttf'
+                multiline: False
+                password: True
+                size_hint: (1, None)
+                height: 40
+                border_width: [0, 0, 0, 0]
+                padding: [10, 10, 10, 10]
+                background_color: (1, 1, 1, 1)  # Remove o fundo padrão do TextInput
+        # Mensagem de erro
+
+            Label:
+                id: mensagem_erro
+                text: ""
+                color: (1, 0, 0, 1)  # Vermelho
+                font_size: 16
+                size_hint: (1, None)
+                height: 30
+
+        # Layout dos botões
+
+        BoxLayout:
+            size_hint: (0.9, None)  # Largura responsiva
+            height: 50
+            pos_hint: {"center_x": 0.5}
+            spacing: 20  # Espaço entre os botões
+
+            # Botão Acessar
+                
+            Button:
+                id: btn_acessar
+                text: 'Acessar'
+                bold: True
+                font_name: 'fonts/Roboto-Black.ttf'
+                size_hint: (0.5, 1)  # Tamanho proporcional
+                on_press: root.acessar_dog()
+                background_color: 0, 0, 0, 0  # Remove o fundo padrão do botão
+                canvas.before:
+                    Color:
+                        rgba: (0.95, 0.6, 0.7, 1)  # Rosa escuro padrão
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        radius: [15, 15, 15, 15]  # Bordas arredondadas
+                
+            # Botão Voltar
+                
+            Button:
+                text: 'Voltar'
+                bold: True
+                font_name: 'fonts/Roboto-Black.ttf'
+                size_hint: (0.5, 1)
+                on_press: root.manager.current = 'login'
+                background_color: 0, 0, 0, 0  # Remove o fundo padrão do botão
+                canvas.before:
+                    Color:
+                        rgba: (0.95, 0.6, 0.7, 1)  # Rosa escuro padrão
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        radius: [15, 15, 15, 15]  # Bordas arredondadas
+
+
+<MeuDogScreen>
+
+    GridLayout:
+        cols: 1
+        padding: [70, 30, 70, 30]
+        spacing: 20  # Espaço geral entre os widgets
+        canvas.before:
+            Color:
+                rgba: (0.702, 0.788, 0.714, 1)  # Cor de fundo
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        # Logo do app
+
+        Image:
+            source: 'logo.png'
+            allow_stretch: True
+            keep_ratio: True
+            size_hint: (0.20, 0.10)
+            pos_hint: {"center_x": 0.5}
+
+        # Layout dos campos de input
+
+        GridLayout:
+            cols: 1
+            size_hint: (0.9, None)
+            height: self.minimum_height
+            pos_hint: {"center_x": 0.5}
+            spacing: 20  # Espaço entre os widgets
+
+            # Input Usuário
+
+            Label:
+                id: nome_dog
+                hint_text: 'Usuário'
+                hint_text_color: (0, 0, 0, 1)  # Preto
+                foreground_color: (0, 0, 0, 1)  # Texto principal em preto
+                font_name: 'fonts/Roboto-Black.ttf'
+                multiline: False
+                size_hint: (1, None)
+                height: 40
+                border_width: [0, 0, 0, 0]
+                padding: [10, 10, 10, 10]
+                background_color: (1, 1, 1, 1)  # Remove o fundo padrão do TextInput
+
+        # Mensagem de erro
+
+            Label:
+                id: mensagem_erro
+                text: "Teste"
+                color: (1, 0, 0, 1)  # Vermelho
+                font_size: 16
+                size_hint: (1, None)
+                height: 30
+
+        # Layout dos botões
+
+        BoxLayout:
+            size_hint: (0.9, None)  # Largura responsiva
+            height: 50
+            pos_hint: {"center_x": 0.5}
+            spacing: 20  # Espaço entre os botões
+                
+            # Botão Login
+                
+            Button:
+                text: 'Login'
+                bold: True
+                font_name: 'fonts/Roboto-Black.ttf'
+                size_hint: (0.5, 1)  # Tamanho proporcional
+                on_press: root.manager.current = 'cadastro'
+                background_color: 0, 0, 0, 0  # Remove o fundo padrão do botão
+                canvas.before:
+                    Color:
+                        rgba: (0.95, 0.6, 0.7, 1)  # Rosa escuro padrão
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        radius: [15, 15, 15, 15]  # Bordas arredondadas
+                
+            # Botão Voltar
+                
+            Button:
+                text: 'Voltar'
+                bold: True
+                font_name: 'fonts/Roboto-Black.ttf'
+                size_hint: (0.5, 1)
+                on_press: root.manager.current = 'escolherdog'
+                background_color: 0, 0, 0, 0  # Remove o fundo padrão do botão
+                canvas.before:
+                    Color:
+                        rgba: (0.95, 0.6, 0.7, 1)  # Rosa escuro padrão
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        radius: [15, 15, 15, 15]  # Bordas arredondadas
