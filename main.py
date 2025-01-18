@@ -76,8 +76,13 @@ class EscolherDogScreen(Screen):
     def on_enter(self):
         """Quando a tela for acessada, tenta recuperar o token e buscar os cachorros do usuário."""
         login_screen = self.manager.get_screen('login')  # Obtém a instância de LoginScreen
+        cadastro_screen = self.manager.get_screen('cadastro')  # Obtém a instância de CadastroScreen
         if hasattr(login_screen, 'token') and login_screen.token:
             self.token = login_screen.token
+            print(f"\nToken de autenticação reload: {self.token}\n")
+            self.carregar_cachorros()  # Carrega os cachorros registrados
+        elif hasattr(cadastro_screen, 'token') and cadastro_screen.token:
+            self.token = cadastro_screen.token
             print(f"\nToken de autenticação reload: {self.token}\n")
             self.carregar_cachorros()  # Carrega os cachorros registrados
         else:
@@ -161,6 +166,10 @@ class MeuDogScreen(Screen):
 
 
 class CadastroScreen(Screen):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.token = None
+
     def on_enter(self):
         """Carregar dados de estados ao entrar na tela"""
         self.ids.estado.values = self.get_states()
@@ -238,6 +247,8 @@ class CadastroScreen(Screen):
                 if resposta.status_code == 201:
                     self.ids.mensagem_erro.text = "Cadastro realizado com sucesso!"
                     self.ids.mensagem_erro.color = (47, 79, 47, 1)  # Verde escuro
+                    self.manager.current = "escolherdog"
+
                 elif resposta.status_code == 409:
                     self.ids.mensagem_erro.text = "E-mail já cadastrado."
                 else:
@@ -266,6 +277,7 @@ class CadastroScreen(Screen):
             if resposta.status_code == 200 or resposta.status_code == 201:
                 # Captura o token JWT do Supabase
                 token = resposta.json().get("access_token")
+                self.salvar_token(token)
                 return token
             else:
                 print(f"Erro ao criar usuário: {resposta.text}")
@@ -300,6 +312,12 @@ class CadastroScreen(Screen):
             return "Cidade e Estado são obrigatórios."
 
         return None
+
+    def salvar_token(self, token):
+        """Salva o token para uso em futuras requisições."""
+        self.token = token  
+        print(f"\nToken de autenticação: {token}\n")
+        return token
 
 # Buid do app
 
